@@ -198,7 +198,7 @@ void setup(){
   prefs.begin("greenhouse",false);
   WiFi.mode(WIFI_STA);WiFi.begin("Wokwi-GUEST","",6);
   configTime(5*3600,0,"pool.ntp.org","time.google.com");
-  mqtt.setServer(MQTT_HOST,1883);mqtt.setCallback(onMessage);mqtt.setBufferSize(768);mqtt.setSocketTimeout(1);
+  mqtt.setServer(MQTT_HOST,1883);mqtt.setCallback(onMessage);mqtt.setBufferSize(768);mqtt.setSocketTimeout(5);
   network.setTimeout(1000);
   stateQueue=xQueueCreate(1,sizeof(StatePacket));commandQueue=xQueueCreate(4,sizeof(IncomingCommand));
   if(!stateQueue||!commandQueue){Serial.println("Queue allocation failed");for(;;)delay(1000);}

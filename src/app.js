@@ -61,7 +61,7 @@ function setLiveControls(value){for(const key of ['temperature','humidity','soil
 $('connect').addEventListener('click',()=>{
  if(client)return;
  mode='live';liveState=null;lastSeen=0;connected=false;setLiveControls(true);$('connect').hidden=true;$('disconnect').hidden=false;$('sensors-mode').hidden=false;$('connection-note').textContent='Подключаемся к брокеру MQTT…';update();
- client=mqtt.connect('wss://broker.hivemq.com:8884/mqtt',{clientId:'sg-8d37a9e6-ui-'+Math.random().toString(16).slice(2,10),connectTimeout:10000,reconnectPeriod:5000,clean:true});
+ client=mqtt.connect('wss://broker.hivemq.com:8884/mqtt',{clientId:'sg-8d37a9e6-ui-'+Math.random().toString(16).slice(2,10),connectTimeout:30000,reconnectPeriod:5000,clean:true});
  client.on('connect',()=>{connected=true;client.subscribe(TOPIC_STATE);$('connection-note').textContent='Брокер подключён. Ждём телеметрию ESP32…';});
  client.on('message',(topic,buffer)=>{
    if(topic!==TOPIC_STATE)return;
